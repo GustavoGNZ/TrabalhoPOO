@@ -1,5 +1,7 @@
 package base;
 
+// Done
+
 public class Artista {
 
     private int ID_Usuario;

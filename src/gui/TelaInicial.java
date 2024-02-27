@@ -6,7 +6,6 @@ package gui;
 
 import base.Usuario;
 import bd.UsuarioDAO;
-import gui.TelaCadastro;
 import javax.swing.JOptionPane;
 
 /**

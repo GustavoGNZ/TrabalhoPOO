@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class MusicaDAO {
 
     public void inserirMusica(Musica musica) {
-        String sql = "INSERT INTO musica(ID_Musica,ID_Album,nome,duracao) "
+        String sql = "INSERT INTO MUSICA(Nome, Duracao, ID_Musica, ID_Album) "
                 + "VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -18,11 +18,11 @@ public class MusicaDAO {
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, musica.getID_Musica());
-            pstm.setInt(2, musica.getID_Album());
-            pstm.setString(3, musica.getNome());
-            pstm.setDouble(4, musica.getDuracao());
-
+            pstm.setString(1, musica.getNome());
+            pstm.setDouble(2, musica.getDuracao());
+            pstm.setInt(3, musica.getID_Musica());
+            pstm.setInt(4, musica.getID_Album());
+     
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
@@ -43,49 +43,52 @@ public class MusicaDAO {
 
     }
     
-    public boolean buscarMusica(String term) {
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet resultSet = null;
-        String sql = "SELECT * FROM Musica WHERE nome = ?";
+    public Musica buscarMusica(String term) {
+    Connection conn = null;
+    PreparedStatement pstm = null;
+    ResultSet resultSet = null;
+    String sql = "SELECT * FROM MUSICA WHERE Nome = ?";
+    Musica musicaEncontrada = null;
 
+    try {
+        conn = ConexaoBD.criarConexao();
+        pstm = conn.prepareStatement(sql);
+        pstm.setString(1, term);
+        resultSet = pstm.executeQuery();
+
+        if (resultSet.next()) {
+            musicaEncontrada = new Musica();
+            musicaEncontrada.setNome(resultSet.getString("Nome"));
+            musicaEncontrada.setDuracao(resultSet.getDouble("Duracao"));
+            musicaEncontrada.setID_Musica(resultSet.getInt("ID_Musica"));
+            musicaEncontrada.setID_Album(resultSet.getInt("ID_Album"));
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    } finally {
+        // Close resources in finally block to ensure they're always closed
         try {
-            conn = ConexaoBD.criarConexao();
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1, term);
-            resultSet = pstm.executeQuery();
-
-            if (resultSet.next()) {
-                conn.close();
-                return true; // Found
-            } else {
-                conn.close();
-                return false; // Not found
+            if (resultSet != null) {
+                resultSet.close();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false; // Error occurred
-        } finally {
-            // Close resources in finally block to ensure they're always closed
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (pstm != null) {
+                pstm.close();
             }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
+    return musicaEncontrada;
+}
+
+    
     
     public void deletarMusica(int ID_Musica) {
-        String sql = "DELETE FROM musica WHERE ID_Musica = ?";
+        String sql = "DELETE FROM MUSICA WHERE ID_Musica = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 

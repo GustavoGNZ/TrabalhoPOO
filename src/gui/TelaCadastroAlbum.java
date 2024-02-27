@@ -41,11 +41,9 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TNome = new javax.swing.JTextField();
-        TGenero = new javax.swing.JTextField();
         TAno = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         BVoltar = new javax.swing.JButton();
         BInserir = new javax.swing.JButton();
         BCadastro = new javax.swing.JButton();
@@ -58,21 +56,16 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("CADASTRO ALBUM");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 510, 60));
-        jPanel1.add(TNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 260, 30));
-        jPanel1.add(TGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 260, 30));
-        jPanel1.add(TAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 260, 30));
+        jPanel1.add(TNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 260, 30));
+        jPanel1.add(TAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 260, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("ANO:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setText("NOME:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("GENERO:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
         BVoltar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         BVoltar.setText("VOLTAR");
@@ -90,7 +83,7 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
                 BInserirActionPerformed(evt);
             }
         });
-        jPanel1.add(BInserir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 220, 40));
+        jPanel1.add(BInserir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 220, 40));
 
         BCadastro.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         BCadastro.setText("CADASTRAR");
@@ -99,7 +92,7 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
                 BCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(BCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 260, -1));
+        jPanel1.add(BCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,12 +202,10 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
     private javax.swing.JButton BInserir;
     private javax.swing.JButton BVoltar;
     private javax.swing.JTextField TAno;
-    private javax.swing.JTextField TGenero;
     private javax.swing.JTextField TNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

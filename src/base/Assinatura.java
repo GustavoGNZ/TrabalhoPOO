@@ -1,5 +1,7 @@
 package base;
 
+// Done
+
 public class Assinatura {
 
     private int ID_Assinatura;

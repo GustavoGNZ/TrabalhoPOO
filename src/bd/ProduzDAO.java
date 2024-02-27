@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 public class ProduzDAO {
 
+    // Apenas insercao na producao 
     public void inserirProduz(Produz produz) throws Exception {
         String sql = "INSERT INTO PRODUZ (ID_Usuario, ID_Album) VALUES (?, ?)";
         Connection conn = null;

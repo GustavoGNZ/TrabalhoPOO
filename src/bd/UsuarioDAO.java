@@ -17,6 +17,8 @@ public class UsuarioDAO {
         PreparedStatement pstm = null;
 
         try {
+            double idIns = Math.round(Math.random()*100);
+            
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
             pstm.setDate(1, new Date(usuario.getDataNasc().getTime()));
@@ -24,13 +26,13 @@ public class UsuarioDAO {
             pstm.setString(3, usuario.getNome());
             pstm.setString(4, usuario.getSenha());
             pstm.setString(5, usuario.getUsuario());
-            pstm.setDouble(6, usuario.getID_Usuario());
-            pstm.setDate(7, new Date(usuario.getDataInicio().getTime()));
-            pstm.setDate(8, new Date(usuario.getDataFim().getTime()));
-            pstm.setInt(9, usuario.getID_Assinatura());
+            pstm.setDouble(6, idIns);
+            pstm.setDate(7, null);
+            pstm.setDate(8, null);
+            pstm.setInt(9, 0);
 
             pstm.execute();
-            JOptionPane.showMessageDialog(null, "Usuário criado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuário criado com sucesso! Seu ID Usuario:" + idIns);
 
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
@@ -77,7 +79,7 @@ public class UsuarioDAO {
     }
 
     public void atualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE USUARIO SET DataNascimento = ?, Email = ?, Nome = ?, Senha = ?, usuario = ?, dataInicio = ?, dataFim = ?, ID_Assinatura = ? WHERE ID_Usuario = ?";
+        String sql = "UPDATE USUARIO SET Email = ?, Senha = ?, WHERE ID_Usuario = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -85,15 +87,9 @@ public class UsuarioDAO {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
 
-            pstm.setDate(1, new Date(usuario.getDataNasc().getTime()));
-            pstm.setString(2, usuario.getEmail());
-            pstm.setString(3, usuario.getNome());
-            pstm.setString(4, usuario.getSenha());
-            pstm.setString(5, usuario.getUsuario());
-            pstm.setDate(6, new Date(usuario.getDataInicio().getTime()));
-            pstm.setDate(7, new Date(usuario.getDataFim().getTime()));
-            pstm.setInt(8, usuario.getID_Assinatura());
-            pstm.setDouble(9, usuario.getID_Usuario());
+            pstm.setString(1, usuario.getEmail());
+            pstm.setString(2, usuario.getSenha());
+            pstm.setDouble(3, usuario.getID_Usuario());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {

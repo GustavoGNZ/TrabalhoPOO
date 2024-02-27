@@ -5,18 +5,9 @@
 package gui;
 
 import base.Adiciona;
-import base.Playlist;
-import base.Usuario;
 import bd.AdicionaDAO;
-import bd.PlaylistDAO;
-import bd.UsuarioDAO;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *

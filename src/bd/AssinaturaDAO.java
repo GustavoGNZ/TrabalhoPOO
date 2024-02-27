@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class AssinaturaDAO {
 
     public void inserirAssinatura(Assinatura assinatura) throws Exception {
-        String sql = "INSERT INTO Assinatura(ID_Assinatura, tipoAssinatura, valor) "
+        String sql = "INSERT INTO ASSINATURA(ID_Assinatura, tipoAssinatura, Valor) "
                 + "VALUES (?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -42,7 +42,7 @@ public class AssinaturaDAO {
     }
 
     public void deletarAssinatura(int ID_Assinatura) throws Exception {
-        String sql = "DELETE FROM Assinatura WHERE ID_Assinatura = ?";
+        String sql = "DELETE FROM ASSINATURA WHERE ID_Assinatura = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -70,7 +70,7 @@ public class AssinaturaDAO {
     }
 
     public void atualizarAssinatura(Assinatura assinatura) throws Exception {
-        String sql = "UPDATE Assinatura SET tipoAssinatura = ?, valor = ? WHERE ID_Assinatura = ?";
+        String sql = "UPDATE ASSINATURA SET tipoAssinatura = ?, Valor = ? WHERE ID_Assinatura = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -104,7 +104,7 @@ public class AssinaturaDAO {
     }
 
     public Assinatura buscarAssinatura(int ID_Assinatura) throws Exception {
-        String sql = "SELECT * FROM Assinatura WHERE ID_Assinatura = ?";
+        String sql = "SELECT * FROM ASSINATURA WHERE ID_Assinatura = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;

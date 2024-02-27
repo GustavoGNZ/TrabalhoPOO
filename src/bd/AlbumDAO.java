@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class AlbumDAO {
 
     public void inserirAlbum(Album album) throws Exception {
-        String sql = "INSERT INTO Album(ID_Album, nome, ano) "
+        String sql = "INSERT INTO ALBUM(Nome, Ano, ID_Album) "
                 + "VALUES (?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -18,9 +18,9 @@ public class AlbumDAO {
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, album.getID_Album());
-            pstm.setString(2, album.getNome());
-            pstm.setInt(3, album.getAno());
+            pstm.setString(1, album.getNome());
+            pstm.setInt(2, album.getAno());
+            pstm.setInt(3, album.getID_Album());
 
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Album salvo com sucesso!");
@@ -42,7 +42,7 @@ public class AlbumDAO {
     }
 
     public void deletarAlbum(int ID_Album) throws Exception {
-        String sql = "DELETE FROM Album WHERE ID_Album = ?";
+        String sql = "DELETE FROM ALBUM WHERE ID_Album = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -70,7 +70,7 @@ public class AlbumDAO {
     }
 
     public void atualizarAlbum(Album album) throws Exception {
-        String sql = "UPDATE Album SET nome = ?, ano = ? WHERE ID_Album = ?";
+        String sql = "UPDATE ALBUM SET nome = ?, ano = ? WHERE ID_Album = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -103,8 +103,8 @@ public class AlbumDAO {
         }
     }
 
-    public Album buscarAlbum(int ID_Album) throws Exception {
-        String sql = "SELECT * FROM Album WHERE ID_Album = ?";
+    public Album buscarAlbum(String Nome) throws Exception {
+        String sql = "SELECT * FROM ALBUM WHERE Nome = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -113,7 +113,7 @@ public class AlbumDAO {
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, ID_Album);
+            pstm.setString(1, Nome);
             rs = pstm.executeQuery();
 
             if (rs.next()) {

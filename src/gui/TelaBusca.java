@@ -4,6 +4,7 @@
  */
 package gui;
 
+import base.Musica;
 import bd.ConexaoBD;
 import bd.MusicaDAO;
 
@@ -104,18 +105,19 @@ public class TelaBusca extends javax.swing.JFrame {
     }//GEN-LAST:event_TmusicaActionPerformed
 
     private void BBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBuscarActionPerformed
-
-        String searchTerm = Tmusica.getText();
+    String searchTerm = Tmusica.getText();
       
-        MusicaDAO musica = new MusicaDAO();
-        
-        
-        if(musica.buscarMusica(searchTerm) == true){
-            JOptionPane.showMessageDialog(null, "Encontrado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Nao Encontrado!");
-        }
-        
+    MusicaDAO musicaDAO = new MusicaDAO();
+    Musica musicaEncontrada = musicaDAO.buscarMusica(searchTerm);
+    
+    if (musicaEncontrada != null) {
+        JOptionPane.showMessageDialog(null, 
+            "Nome: " + musicaEncontrada.getNome() + "\n" +
+            "Duração: " + musicaEncontrada.getDuracao() + "\n"
+        );
+    } else {
+        JOptionPane.showMessageDialog(null, "Música não encontrada!");
+    }
     }//GEN-LAST:event_BBuscarActionPerformed
 
     private void BVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVoltarActionPerformed

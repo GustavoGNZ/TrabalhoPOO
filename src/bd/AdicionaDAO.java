@@ -3,14 +3,13 @@ package bd;
 import base.Adiciona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class AdicionaDAO {
 
     public void adicionaPlaylist(Adiciona adiciona) throws Exception {
-        String sql = "INSERT INTO adiciona(ID_Musica, ID_Playlist) "
+        String sql = "INSERT INTO ADICIONA(ID_Musica, ID_Playlist) "
                 + "VALUES (?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -41,7 +40,7 @@ public class AdicionaDAO {
     }
 
     public void removePlaylist(Adiciona adiciona) throws Exception {
-        String sql = "DELETE FROM adiciona WHERE ID_Musica = ? AND ID_Playlist = ?";
+        String sql = "DELETE FROM ADICIONA WHERE ID_Musica = ? AND ID_Playlist = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 

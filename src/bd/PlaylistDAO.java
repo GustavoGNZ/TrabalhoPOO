@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class PlaylistDAO {
 
     public void inserirPlaylist(Playlist playlist) throws Exception {
-        String sql = "INSERT INTO playlist(ID_Playlist, ID_Usuario, nome, descricao) "
+        String sql = "INSERT INTO PLAYLIST(Nome, Descricao, ID_Playlist, ID_Usuario) "
                 + "VALUES (?, ?, ?, ?)";
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -18,10 +18,10 @@ public class PlaylistDAO {
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, playlist.getID_Playlist());
-            pstm.setInt(2, playlist.getID_Usuario());
-            pstm.setString(3, playlist.getNome());
-            pstm.setString(4, playlist.getDescricao());
+            pstm.setString(1, playlist.getNome());
+            pstm.setString(2, playlist.getDescricao());
+            pstm.setInt(3, playlist.getID_Playlist());
+            pstm.setInt(4, playlist.getID_Usuario());
 
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Playlist salva com sucesso ID Playlist: " + playlist.getID_Playlist());
@@ -43,45 +43,67 @@ public class PlaylistDAO {
     }
 
     public void deletarPlaylist(int ID_Playlist) throws Exception {
-        String sql = "DELETE FROM Playlist WHERE ID_Playlist = ?";
-        Connection conn = null;
-        PreparedStatement pstm = null;
+    String deleteAdicionaSql = "DELETE FROM ADICIONA WHERE ID_Playlist = ?";
+    String deletePlaylistSql = "DELETE FROM PLAYLIST WHERE ID_Playlist = ?";
+    Connection conn = null;
+    PreparedStatement deleteAdicionaPstm = null;
+    PreparedStatement deletePlaylistPstm = null;
 
-        try {
-            conn = ConexaoBD.criarConexao();
-            pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, ID_Playlist);
-            pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Playlist deletada com sucesso!");
+    try {
+        conn = ConexaoBD.criarConexao();
+        conn.setAutoCommit(false); // Start a transaction
 
-        } catch (SQLException ex) {
-            System.out.println("Erro: " + ex);
-        } finally {
+        // Delete associated rows in the ADICIONA table
+        deleteAdicionaPstm = conn.prepareStatement(deleteAdicionaSql);
+        deleteAdicionaPstm.setInt(1, ID_Playlist);
+        deleteAdicionaPstm.executeUpdate();
+
+        // Delete the playlist
+        deletePlaylistPstm = conn.prepareStatement(deletePlaylistSql);
+        deletePlaylistPstm.setInt(1, ID_Playlist);
+        deletePlaylistPstm.executeUpdate();
+
+        conn.commit(); // Commit the transaction
+        JOptionPane.showMessageDialog(null, "Playlist deletada com sucesso!");
+    } catch (SQLException ex) {
+        if (conn != null) {
             try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("Erro: " + ex);
+                conn.rollback(); // Rollback the transaction if an error occurs
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
+        System.out.println("Erro: " + ex);
+    } finally {
+        try {
+            if (deleteAdicionaPstm != null) {
+                deleteAdicionaPstm.close();
+            }
+            if (deletePlaylistPstm != null) {
+                deletePlaylistPstm.close();
+            }
+            if (conn != null) {
+                conn.setAutoCommit(true); // Restore auto-commit mode
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro: " + ex);
+        }
     }
+}
+
 
     public void atualizarPlaylist(Playlist playlist) throws Exception {
-        String sql = "UPDATE Playlist SET ID_Usuario = ?, nome = ?, descricao = ? WHERE ID_Playlist = ?";
+        String sql = "UPDATE PLAYLIST Nome = ?, Descricao = ? WHERE ID_Playlist = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, playlist.getID_Usuario());
-            pstm.setString(2, playlist.getNome());
-            pstm.setString(3, playlist.getDescricao());
-            pstm.setInt(4, playlist.getID_Playlist());
+            pstm.setString(1, playlist.getNome());
+            pstm.setString(2, playlist.getDescricao());
+            pstm.setInt(3, playlist.getID_Playlist());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {

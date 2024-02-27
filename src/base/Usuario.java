@@ -2,6 +2,8 @@ package base;
 
 import java.util.Date;
 
+// Done
+
 public class Usuario {
     private String nome, email, senha, usuario;
     private Date dataNasc, dataInicio, dataFim;

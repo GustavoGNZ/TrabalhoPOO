@@ -5,14 +5,7 @@
 package gui;
 
 import base.Musica;
-import base.Usuario;
 import bd.MusicaDAO;
-import bd.UsuarioDAO;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *

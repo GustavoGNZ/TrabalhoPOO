@@ -58,8 +58,8 @@ public class TelaCadastroAtualizar extends javax.swing.JFrame {
         jPanel1.add(TIDUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 260, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("ID_USUARIO:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, -1));
+        jLabel3.setText("SEU ID_USUARIO:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("EMAIL:");
