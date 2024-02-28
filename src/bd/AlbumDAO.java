@@ -21,9 +21,10 @@ public class AlbumDAO {
             pstm.setString(1, album.getNome());
             pstm.setInt(2, album.getAno());
             pstm.setInt(3, album.getID_Album());
+          
 
             pstm.execute();
-            JOptionPane.showMessageDialog(null, "Album salvo com sucesso!");
+            JOptionPane.showMessageDialog(null, "Album salvo com sucesso! ID Album: " +album.getID_Album());
 
         } catch (SQLException ex) {
             System.out.println("Erro: " + ex);

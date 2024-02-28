@@ -2,13 +2,11 @@ package base;
 
 import java.util.Date;
 
-// Done
-
 public class Usuario {
     private String nome, email, senha, usuario;
     private Date dataNasc, dataInicio, dataFim;
     private int ID_Assinatura;
-    private double ID_Usuario;
+    private int ID_Usuario;
 
     public String getNome() {
         return nome;
@@ -74,11 +72,11 @@ public class Usuario {
         this.ID_Assinatura = ID_Assinatura;
     }
 
-    public double getID_Usuario() {
+    public int getID_Usuario() {
         return ID_Usuario;
     }
 
-    public void setID_Usuario(double ID_Usuario) {
+    public void setID_Usuario(int ID_Usuario) {
         this.ID_Usuario = ID_Usuario;
     }
 

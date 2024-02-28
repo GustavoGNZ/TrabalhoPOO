@@ -1,7 +1,5 @@
 package base;
 
-// Done
-
 public class Compoe {
     private int ID_Musica;
     private int ID_Usuario;

@@ -1,9 +1,8 @@
-package bd;
+    package bd;
 
 import base.Musica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Date;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -116,6 +115,34 @@ public class MusicaDAO {
     }
     
     
-    
+    public void inserirMusicaAlbum(Musica musica) {
+        String sql = "UPDATE MUSICA SET ID_Album = ? WHERE ID_Musica = ?";
+        Connection conn = null;
+        PreparedStatement pstm = null;
+
+        try {
+            conn = ConexaoBD.criarConexao();
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, musica.getID_Album());
+            pstm.setInt(2, musica.getID_Musica());
+            pstm.execute();
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception ex) {
+                System.out.println("Erro: " + ex);
+            }
+        }
+
+    }
     
 }

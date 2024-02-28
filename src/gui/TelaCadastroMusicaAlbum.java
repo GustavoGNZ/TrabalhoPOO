@@ -31,14 +31,12 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        TNome = new javax.swing.JTextField();
-        TDuracao = new javax.swing.JTextField();
-        TIDAlbum = new javax.swing.JTextField();
+        TIDMusica = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         BVoltar = new javax.swing.JButton();
         BCadastro = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        TIDAlbum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,21 +46,17 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("CADASTRO MUSICA ALBUM");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 710, 60));
-        jPanel1.add(TNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 260, 30));
-        jPanel1.add(TDuracao, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 260, 30));
-        jPanel1.add(TIDAlbum, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 260, 30));
+
+        TIDMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TIDMusicaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(TIDMusica, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 260, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("ID ALBUM:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("NOME:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setText("DURACAO (segundos):");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        jLabel2.setText("ID MUSICA:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
 
         BVoltar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         BVoltar.setText("VOLTAR");
@@ -82,6 +76,11 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
         });
         jPanel1.add(BCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 260, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("ID ALBUM:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, -1, -1));
+        jPanel1.add(TIDAlbum, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 260, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,25 +97,20 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
 
     private void BVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVoltarActionPerformed
 
-        TelaMenu tMenu = new TelaMenu();
-        tMenu.setVisible(true);
         this.dispose();
-
+        
     }//GEN-LAST:event_BVoltarActionPerformed
 
     private void BCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCadastroActionPerformed
 
-     MusicaDAO musicaDao = new MusicaDAO();
-
-        int idMus = (int) Math.round(Math.random() * 100);
+        MusicaDAO musicaDao = new MusicaDAO();
         
-        Musica musica = new Musica();
-
-        String duracaoStr = TDuracao.getText();
-        double duracao = 0.0; // Valor padrão caso a conversão falhe
-
+        String idMus = TIDMusica.getText();
+       
+        int idMusInt = 0;
+        
         try {
-            duracao = Double.parseDouble(duracaoStr);
+            idMusInt = Integer.parseInt(idMus);
         } catch (NumberFormatException e) {
             // Se houver um erro na conversão, você pode lidar com isso aqui
             System.out.println("Erro ao converter para double: " + e.getMessage());
@@ -131,16 +125,22 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
             // Se houver um erro na conversão, você pode lidar com isso aqui
             System.out.println("Erro ao converter para int: " + e.getMessage());
         }
-
-        musica.setID_Musica(idMus);
-        musica.setID_Album(IDAlbum);
-        musica.setNome(TNome.getText());
-        musica.setDuracao(duracao);
-
-        musicaDao.inserirMusica(musica);
         
+        
+        Musica musica = new Musica();
+        
+        musica.setID_Musica(idMusInt);
+        musica.setID_Album(IDAlbum);
+        
+        musicaDao.inserirMusica(musica);
+        musicaDao.inserirMusicaAlbum(musica);
+
         
     }//GEN-LAST:event_BCadastroActionPerformed
+
+    private void TIDMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIDMusicaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TIDMusicaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,13 +183,11 @@ public class TelaCadastroMusicaAlbum extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCadastro;
     private javax.swing.JButton BVoltar;
-    private javax.swing.JTextField TDuracao;
     private javax.swing.JTextField TIDAlbum;
-    private javax.swing.JTextField TNome;
+    private javax.swing.JTextField TIDMusica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

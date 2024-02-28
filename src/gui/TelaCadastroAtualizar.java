@@ -6,10 +6,6 @@ package gui;
 
 import base.Usuario;
 import bd.UsuarioDAO;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -130,8 +126,8 @@ public class TelaCadastroAtualizar extends javax.swing.JFrame {
             
             
             String idString = TIDUsuario.getText();
-            double idUser = 0.0;
-            idUser = Double.parseDouble(idString);
+            int idUser = 0;
+            idUser = Integer.parseInt(idString);
             
             user.setSenha(senha);
             user.setID_Usuario(idUser);

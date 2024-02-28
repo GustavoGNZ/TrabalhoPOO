@@ -1,7 +1,5 @@
 package base;
 
-// Done
-
 public class Produz {
     private int ID_Usuario;
     private int ID_Album;

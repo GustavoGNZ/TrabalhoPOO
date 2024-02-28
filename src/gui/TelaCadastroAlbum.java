@@ -5,16 +5,7 @@
 package gui;
 
 import base.Album;
-import base.Usuario;
 import bd.AlbumDAO;
-import bd.UsuarioDAO;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,7 +111,7 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
     private void BInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BInserirActionPerformed
 
         TelaCadastroMusicaAlbum tMusica = new TelaCadastroMusicaAlbum();
-        tMusica.setVisible(true);
+        tMusica.setVisible(true);   
         
     }//GEN-LAST:event_BInserirActionPerformed
 
@@ -153,9 +144,6 @@ public class TelaCadastroAlbum extends javax.swing.JFrame {
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(TelaCadastroAlbum.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        
-        
        
     }//GEN-LAST:event_BCadastroActionPerformed
 

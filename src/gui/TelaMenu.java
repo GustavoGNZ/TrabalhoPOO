@@ -156,12 +156,18 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void BSerArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSerArtistaActionPerformed
         // TODO add your handling code here:
+        TelaSerArtista tArtista = new TelaSerArtista();
+        tArtista.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_BSerArtistaActionPerformed
 
     private void BMenuArtista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BMenuArtista2ActionPerformed
-        TelaMenuArtista tMArtista = new TelaMenuArtista();
+        TelaLoginArtista tMArtista = new TelaLoginArtista();
         tMArtista.setVisible(true);
         this.dispose();
+        
+        
     }//GEN-LAST:event_BMenuArtista2ActionPerformed
 
     private void BDeletar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BDeletar1ActionPerformed

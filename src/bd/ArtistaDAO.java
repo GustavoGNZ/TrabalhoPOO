@@ -18,7 +18,7 @@ public class ArtistaDAO {
         try {
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
-            pstm.setDouble(1, artista.getRemuneracao());
+            pstm.setDouble(1, 2500);
             pstm.setString(2, artista.getGenero());
             pstm.setInt(3, artista.getID_Usuario());
             

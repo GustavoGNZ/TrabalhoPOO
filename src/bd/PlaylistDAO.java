@@ -94,7 +94,7 @@ public class PlaylistDAO {
 
 
     public void atualizarPlaylist(Playlist playlist) throws Exception {
-        String sql = "UPDATE PLAYLIST Nome = ?, Descricao = ? WHERE ID_Playlist = ?";
+        String sql = "UPDATE PLAYLIST SET Nome = ?, Descricao = ? WHERE ID_Playlist = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 

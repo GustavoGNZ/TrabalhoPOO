@@ -123,12 +123,11 @@ public class TelaCadastroPlaylist extends javax.swing.JFrame {
             // Se houver um erro na conversão, você pode lidar com isso aqui
             System.out.println("Erro ao converter para int: " + e.getMessage());
         }
-        
+        play.setNome(TNome.getText());
+        play.setDescricao(TDescricao1.getText());
         play.setID_Playlist(idPlay);
         play.setID_Usuario(idUserInt);
-        play.setNome(TNome.getText());
-        play.setDescricao(TIDUsuario.getText());
-
+        
         try {
             playlistDAO.inserirPlaylist(play);
         } catch (Exception ex) {

@@ -19,6 +19,8 @@ public class UsuarioDAO {
         try {
             double idIns = Math.round(Math.random()*100);
             
+            int id = (int) idIns;
+            
             conn = ConexaoBD.criarConexao();
             pstm = conn.prepareStatement(sql);
             pstm.setDate(1, new Date(usuario.getDataNasc().getTime()));
@@ -26,13 +28,13 @@ public class UsuarioDAO {
             pstm.setString(3, usuario.getNome());
             pstm.setString(4, usuario.getSenha());
             pstm.setString(5, usuario.getUsuario());
-            pstm.setDouble(6, idIns);
+            pstm.setInt(6, id);
             pstm.setDate(7, null);
             pstm.setDate(8, null);
             pstm.setInt(9, 0);
 
             pstm.execute();
-            JOptionPane.showMessageDialog(null, "Usuário criado com sucesso! Seu ID Usuario:" + idIns);
+            JOptionPane.showMessageDialog(null, "Usuário criado com sucesso! Seu ID Usuario:" + id);
 
         } catch (Exception ex) {
             System.out.println("Erro: " + ex);
@@ -50,36 +52,49 @@ public class UsuarioDAO {
         }
     }
 
-    public void deletarUsuario(double id) {
-        String sql = "DELETE FROM USUARIO WHERE ID_Usuario = ?";
-        Connection conn = null;
-        PreparedStatement pstm = null;
+    public void deletarUsuario(int id) {
+    Connection conn = null;
+    PreparedStatement pstm = null;
 
-        try {
-            conn = ConexaoBD.criarConexao();
-            pstm = conn.prepareStatement(sql);
-            pstm.setDouble(1, id);
-            pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!");
+    try {
+        conn = ConexaoBD.criarConexao();
+        conn.setAutoCommit(false); // Inicia uma transação
 
-        } catch (Exception ex) {
-            System.out.println("Erro: " + ex);
-        } finally {
+        // Em seguida, exclui o usuário na tabela USUARIO
+        String deleteUsuarioSql = "DELETE FROM USUARIO WHERE ID_Usuario = ?";
+        pstm = conn.prepareStatement(deleteUsuarioSql);
+        pstm.setInt(1, id);
+        pstm.executeUpdate();
+
+        conn.commit(); // Confirma a transação
+        JOptionPane.showMessageDialog(null, "Usuário e seus dados relacionados deletados com sucesso!");
+    } catch (Exception ex) {
+        if (conn != null) {
             try {
-                if (pstm != null) {
-                    pstm.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception ex) {
-                System.out.println("Erro: " + ex);
+                conn.rollback(); // Desfaz a transação se ocorrer um erro
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
+        System.out.println("Erro: " + ex);
+    } finally {
+        try {
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (conn != null) {
+                conn.setAutoCommit(true); // Restaura o modo de auto-commit
+                conn.close();
+            }
+        } catch (Exception ex) {
+            System.out.println("Erro: " + ex);
+        }
     }
+}
+
 
     public void atualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE USUARIO SET Email = ?, Senha = ?, WHERE ID_Usuario = ?";
+        String sql = "UPDATE USUARIO SET Email = ?, Senha = ? WHERE ID_Usuario = ?";
         Connection conn = null;
         PreparedStatement pstm = null;
 
@@ -89,7 +104,7 @@ public class UsuarioDAO {
 
             pstm.setString(1, usuario.getEmail());
             pstm.setString(2, usuario.getSenha());
-            pstm.setDouble(3, usuario.getID_Usuario());
+            pstm.setInt(3, usuario.getID_Usuario());
 
             int rowsAffected = pstm.executeUpdate();
             if (rowsAffected > 0) {
@@ -128,7 +143,7 @@ public class UsuarioDAO {
 
             if (rs.next()) {
                 usuarioEncontrado = new Usuario();
-                usuarioEncontrado.setID_Usuario(rs.getDouble("ID_Usuario"));
+                usuarioEncontrado.setID_Usuario(rs.getInt("ID_Usuario"));
                 usuarioEncontrado.setNome(rs.getString("Nome"));
                 usuarioEncontrado.setEmail(rs.getString("Email"));
                 usuarioEncontrado.setUsuario(rs.getString("usuario"));
