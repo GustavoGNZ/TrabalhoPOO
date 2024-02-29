@@ -16,7 +16,6 @@ Este projeto desempenha um papel fundamental no aprendizado da disciplina de Pro
 - Criação, edição e exclusão de playlists
 - Gerenciamento de perfil de usuário
 - Transformação de usuário em artista
-- Integração com APIs de streaming de música (opcional)
 
 ## Tecnologias Utilizadas
 
