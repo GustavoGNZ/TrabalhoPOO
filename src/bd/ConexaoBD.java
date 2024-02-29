@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class ConexaoBD {
 
     private static final String usuario = "root";
-    private static final String senha = "!Musicapp1208!";
+    private static final String senha = "placeholder";
     private static final String bd_url = "jdbc:mysql://localhost:3306/musicapp";
 
     public static Connection criarConexao() throws Exception {
